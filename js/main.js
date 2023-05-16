@@ -121,22 +121,26 @@ posts.forEach((element, index) => {
 
 
 
-
+let counter = 0;
 
 console.log(posts[0].id);
 function addLikeCounter(){
-    posts.map((idNumber, index) => {
-        if (posts[index].id == 1) {
-         idNumber.likes += 1;
-         console.log(idNumber.likes);
-         buttonInteractionLike = document.querySelector(`[id="like-counter-${posts[0].id}"]`)
-         console.log(buttonInteractionLike);
-         buttonInteractionLike.innerHTML = `${idNumber.likes}`
-        }
-        
-        return idNumber;
-       })
-       
+    
+    if (counter == 0){
+        posts.map((idNumber, index) => {
+            if (posts[index].id == 1) {
+             idNumber.likes += 1;
+             console.log(idNumber.likes);
+             buttonInteractionLike.classList.add("like-button--liked")
+             buttonInteractionLike = document.querySelector(`[id="like-counter-${posts[0].id}"]`)
+             console.log(buttonInteractionLike);
+             buttonInteractionLike.innerHTML = `${idNumber.likes}`;
+             counter++;
+            }
+            
+            return idNumber;
+           })
+    }  
 };
 
 
@@ -147,7 +151,8 @@ function addLikeCounter(){
 let buttonInteractionLike = document.querySelector('[data-postid="1"]');
 console.log(buttonInteractionLike);
 
-buttonInteractionLike.addEventListener('click', addLikeCounter);
+buttonInteractionLike.addEventListener('click', addLikeCounter );
+
 
 // let elSelectedLikes;
 // console.log(posts[0].id);
