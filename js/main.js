@@ -124,17 +124,6 @@ posts.forEach((element, index) => {
 
 
 console.log(posts[0].id);
-
-
-
-//addLikeCounter(); // se non runno questa funzione qua il numero non aumento anche se clicko il bottone
-
-
-
-let buttonInteractionLike = document.querySelector('[data-postid="1"]');
-console.log(buttonInteractionLike);
-
-buttonInteractionLike.addEventListener('click', 
 function addLikeCounter(){
     posts.map((idNumber, index) => {
         if (posts[index].id == 1) {
@@ -148,8 +137,17 @@ function addLikeCounter(){
         return idNumber;
        })
        
-}
-);
+};
+
+
+//addLikeCounter(); // se non runno questa funzione qua il numero non aumento anche se clicko il bottone
+
+
+
+let buttonInteractionLike = document.querySelector('[data-postid="1"]');
+console.log(buttonInteractionLike);
+
+buttonInteractionLike.addEventListener('click', addLikeCounter);
 
 // let elSelectedLikes;
 // console.log(posts[0].id);
