@@ -105,7 +105,7 @@ posts.forEach((element, index) => {
                                 <div class="post__footer">
                                     <div class="likes js-likes">
                                         <div class="likes__cta">
-                                            <a class="like-button  js-like-button" href="#" data-postid="1">
+                                            <a class="like-button  js-like-button" href="#" data-postid="${posts[index].id}">
                                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                                 <span class="like-button__label">Mi Piace</span>
                                             </a>
@@ -118,3 +118,60 @@ posts.forEach((element, index) => {
                             </div>
     `
 });
+
+let buttonInteractionLike = document.querySelector('[data-postid="1"]');
+
+console.log(buttonInteractionLike);
+
+let elSelectedLikes;
+console.log(posts[0].id);
+function addLikeCounter(){
+    const upd_id = posts.map(idNumber => {
+        if (posts[0].id == 1) {
+         idNumber.likes += 1;
+         console.log(idNumber.likes);
+        }
+        
+        return idNumber;
+       })
+       
+};
+
+console.log(addLikeCounter());
+
+
+
+
+
+
+
+buttonInteractionLike.addEventListener('click', 
+function addLikeCounter(){
+    console.log(posts[0].likes);
+});
+
+// let elSelectedLikes;
+// console.log(posts[0].id);
+
+// function addLikeCounter(){
+//     const upd_id = posts.map((idNumber, index) => {
+//         console.log(index);
+//         if (posts[0].id == 0) {
+//           posts[0].likes += 1;
+//         }
+//        })
+       
+// };
+
+// // console.log(addLikeCounter());
+
+// console.log(posts[0].id);
+
+
+
+
+
+// buttonInteractionLike.addEventListener('click', 
+// function addLikeCounter(){
+//     console.log(posts[0].likes);
+// });
