@@ -126,10 +126,13 @@ console.log(buttonInteractionLike);
 let elSelectedLikes;
 console.log(posts[0].id);
 function addLikeCounter(){
-    const upd_id = posts.map(idNumber => {
-        if (posts[0].id == 1) {
+    const upd_id = posts.map((idNumber, index) => {
+        if (posts[index].id == 1) {
          idNumber.likes += 1;
          console.log(idNumber.likes);
+         buttonInteractionLike = document.querySelector(`[data-postid="${posts[0].id}"]`)
+         console.log(buttonInteractionLike);
+         buttonInteractionLike.innerHTML = `${idNumber.likes}`
         }
         
         return idNumber;
@@ -137,8 +140,8 @@ function addLikeCounter(){
        
 };
 
-console.log(addLikeCounter());
 
+addLikeCounter();
 
 
 
