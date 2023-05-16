@@ -84,34 +84,34 @@ posts.forEach((element, index) => {
                                 <div class="post__header">
                                     <div class="post-meta">                    
                                         <div class="post-meta__icon">
-                                            <img class="profile-pic" src="${posts[index].author.image}" alt="${posts[index].author.name}">                    
+                                            <img class="profile-pic" src="${element.author.image}" alt="${element.author.name}">                    
                                         </div>
                                         <div class="post-meta__data">
                                             <div class="post-meta__author">
-                                                ${posts[index].author.name}
+                                                ${element.author.name}
                                             </div>
                                             <div class="post-meta__time">
-                                                ${posts[index].created}
+                                                ${element.created}
                                             </div>
                                         </div>                    
                                     </div>
                                 </div>
                                 <div class="post__text">
-                                    ${posts[index].content}
+                                    ${element.content}
                                 </div>
                                 <div class="post__image">
-                                    <img src="${posts[index].media}" alt="">
+                                    <img src="${element.media}" alt="">
                                 </div>
                                 <div class="post__footer">
                                     <div class="likes js-likes">
                                         <div class="likes__cta">
-                                            <a class="like-button  js-like-button" href="#" data-postid="${posts[index].id}">
+                                            <a class="ciao like-button  js-like-button" href="#" data-postid="${index}">
                                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                                 <span class="like-button__label">Mi Piace</span>
                                             </a>
                                         </div>
                                         <div class="likes__counter">
-                                            Piace a <b id="like-counter-${posts[index].id}" class="js-likes-counter">${posts[index].likes}</b> persone
+                                            Piace a <b id="like-counter-${index}" class="js-likes-counter">${element.likes}</b> persone
                                         </div>
                                     </div> 
                                 </div>            
@@ -121,26 +121,50 @@ posts.forEach((element, index) => {
 
 
 
-let counter = 0;
 
+const likedPosts = [];
 console.log(posts[0].id);
-function addLikeCounter(){
+function addLikeCounter(e){
+  
+    e.preventDefault(); //previene refresh della pagina
+    if(e.target !== e.currentTarget){ // fa si che quando si clicka qualcosa diverso da l'anchor in questo caso non succeda nulla 
+        return}
     
-    if (counter == 0){
-        posts.map((idNumber, index) => {
-            if (posts[index].id == 1) {
-             idNumber.likes += 1;
-             console.log(idNumber.likes);
-             buttonInteractionLike.classList.add("like-button--liked")
-             buttonInteractionLike = document.querySelector(`[id="like-counter-${posts[0].id}"]`)
-             console.log(buttonInteractionLike);
-             buttonInteractionLike.innerHTML = `${idNumber.likes}`;
-             counter++;
-            }
+        let id = e.target.getAttribute("data-postid"); // cerco nell'anchor(e.target) l'attributo "data-postid" e lo metto nella variabile id
+
+
+        // let post = posts.filter(i => {return i === id});
+        // post.likes++;
+        // console.log("post",post);
+        let counterId = document.getElementById(`like-counter-${id}`) //cerco nel documento l'elemento con id `like-counter-${id}` e lo metto nella variabile counterId
+        let likeDiv = document.getElementsByClassName("likes__cta");
+        console.log("guardaquaaa",likeDiv);
+        // likeDiv.document.classList.add("like-button--liked");
+        counterId.innerHTML = `${posts[id].likes++}`; //modifico il contenuto del html con ${posts[id].likes++}`
+        
+        console.log(posts[id]); 
+        console.log(id);
+        console.log(e.target);
+        
+
+
+    // if (counter == 0){
+    //     posts.forEach((post, index) => {
+    //         if (post.id == 1) {
+    //             idNumber.likes += 1;
+    //             console.log(idNumber.likes);
+    //             buttonInteractionLike.classList.add("like-button--liked")
+    //             buttonInteractionLike = document.querySelector(`[id="like-counter-${posts[0].id}"]`)
+    //             likedPosts.push(posts[0].id);
+    //             console.log(likedPosts);
+    //             console.log(buttonInteractionLike);
+    //             buttonInteractionLike.innerHTML = `${idNumber.likes}`;
+    //             counter++;
+    //         }
             
-            return idNumber;
-           })
-    }  
+    //         return idNumber;
+    //        })
+    // }  
 };
 
 
@@ -148,11 +172,27 @@ function addLikeCounter(){
 
 
 
-let buttonInteractionLike = document.querySelector('[data-postid="1"]');
-console.log(buttonInteractionLike);
 
-buttonInteractionLike.addEventListener('click', addLikeCounter );
+// console.log(buttonInteractionLike);
+let buttonInteractionLike = [];
 
+buttonInteractionLike = document.getElementsByClassName("ciao");
+
+let buttons = [...buttonInteractionLike];
+console.log("all button", buttonInteractionLike);
+
+buttons.forEach(button => {
+        button.addEventListener('click', (e) => addLikeCounter(e));
+        console.log(button.getAttribute("data-postid"));
+});
+
+// buttonInteractionLike.addEventListener('click', addLikeCounter(e));
+
+
+
+// console.log(buttonInteractionLike);
+
+// buttonInteractionLike.addEventListener('click', addLikeCounter );
 
 // let elSelectedLikes;
 // console.log(posts[0].id);
